@@ -1,10 +1,23 @@
 """Tests for fullqualname."""
 
+import decorator
 import inspect
 import nose
 import sys
 
 from fullqualname import fullqualname
+
+
+def decorator_(f_):
+    def wrapper_(f_, *args, **kw):
+        return f_(*args, **kw)
+    return decorator.decorator(wrapper_, f_)
+
+
+class C_(object):
+    @decorator_
+    def decorated_method_(self):
+        """decorated method"""
 
 
 def test_builtin_function():
@@ -82,5 +95,23 @@ def test_function():
     assert type(obj).__name__ == 'function'
 
     expected = __name__ + '.func_'
+
+    nose.tools.assert_equals(fullqualname(obj), expected)
+
+
+def test_function_wrapped_attribute():
+    # Test function object that has a __wrapped__ attribute.
+
+    obj = C_.decorated_method_
+
+    assert hasattr(obj, '__wrapped__')
+
+    # In Python 3, object type is 'function'.
+    assert type(obj).__name__ == 'function' or sys.version_info[0] == 2
+
+    # In Python 2, object is an 'instancemethod'.
+    assert type(obj).__name__ == 'instancemethod' or sys.version_info[0] == 3
+
+    expected = __name__ + '.C_.decorated_method_'
 
     nose.tools.assert_equals(fullqualname(obj), expected)

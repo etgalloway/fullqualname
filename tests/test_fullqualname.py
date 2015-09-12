@@ -68,3 +68,19 @@ def test_builtin_classmethod():
         expected = '__builtin__.object.mro'
 
     nose.tools.assert_equals(fullqualname(obj), expected)
+
+
+def func_():
+    """function"""
+
+
+def test_function():
+    # Test function object.
+
+    obj = func_
+
+    assert type(obj).__name__ == 'function'
+
+    expected = __name__ + '.func_'
+
+    nose.tools.assert_equals(fullqualname(obj), expected)

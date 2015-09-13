@@ -143,3 +143,18 @@ def test_method_descriptor():
         expected = '__builtin__.str.split'
 
     nose.tools.assert_equals(fullqualname(obj), expected)
+
+
+def test_wrapper_descriptor():
+    # Test wrapper descriptor object.
+
+    obj = int.__add__
+
+    assert type(obj).__name__ == 'wrapper_descriptor'
+
+    if sys.version_info >= (3, ):
+        expected = 'builtins.int.__add__'
+    else:
+        expected = '__builtin__.int.__add__'
+
+    nose.tools.assert_equals(fullqualname(obj), expected)

@@ -20,6 +20,10 @@ class C_(object):
     def decorated_method_(self):
         """decorated method"""
 
+    @property
+    def property_(self):
+        """property"""
+
 
 def test_builtin_function():
     # Test built-in function object.
@@ -182,5 +186,24 @@ def test_method_wrapper():
         expected = 'builtins.list.__add__'
     else:
         expected = '__builtin__.list.__add__'
+
+    nose.tools.assert_equals(fullqualname(obj), expected)
+
+
+def test_property():
+    # Test property object.
+    # Python 2 does not support introspection for properties.
+
+    obj = C_.property_
+
+    assert type(obj).__name__ == 'property'
+
+    # Property object has a fget attribute.
+    assert hasattr(obj, 'fget')
+
+    if sys.version_info.major == 3:
+        expected = __name__ + '.C_.property_'
+    else:
+        expected = '__builtin__.property'
 
     nose.tools.assert_equals(fullqualname(obj), expected)

@@ -168,3 +168,19 @@ def test_module():
 
     expected = 'sys'
     nose.tools.assert_equals(fullqualname(obj), expected)
+
+
+def test_method_wrapper():
+    # Test 'method-wrapper' object.
+
+    obj = [].__add__
+
+    # Type 'method-wrapper' is only defined in CPython.
+    assert type(obj).__name__ == 'method-wrapper'
+
+    if sys.version_info >= (3, ):
+        expected = 'builtins.list.__add__'
+    else:
+        expected = '__builtin__.list.__add__'
+
+    nose.tools.assert_equals(fullqualname(obj), expected)

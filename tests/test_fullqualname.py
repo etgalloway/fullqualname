@@ -158,3 +158,13 @@ def test_wrapper_descriptor():
         expected = '__builtin__.int.__add__'
 
     nose.tools.assert_equals(fullqualname(obj), expected)
+
+
+def test_module():
+    # Test module object.
+
+    obj = sys
+    assert type(obj).__name__ == 'module'
+
+    expected = 'sys'
+    nose.tools.assert_equals(fullqualname(obj), expected)

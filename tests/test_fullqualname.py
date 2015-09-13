@@ -128,3 +128,18 @@ def test_member_descriptor():
     expected = 'datetime.timedelta.days'
 
     nose.tools.assert_equals(fullqualname(obj), expected)
+
+
+def test_method_descriptor():
+    # Test method descriptor object.
+
+    obj = str.split
+
+    assert type(obj).__name__ == 'method_descriptor'
+
+    if sys.version_info >= (3, ):
+        expected = 'builtins.str.split'
+    else:
+        expected = '__builtin__.str.split'
+
+    nose.tools.assert_equals(fullqualname(obj), expected)

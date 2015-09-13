@@ -16,6 +16,10 @@ def decorator_(f_):
 
 
 class C_(object):
+    @classmethod
+    def classmethod_(cls):
+        """function decorated by @classmethod"""
+
     @decorator_
     def decorated_method_(self):
         """decorated method"""
@@ -230,5 +234,30 @@ def test_method_self_is_not_a_class():
     assert not inspect.isclass(obj.__self__)
 
     expected = __name__ + '.C_.method_'
+
+    nose.tools.assert_equals(fullqualname(obj), expected)
+
+
+def test_method_self_is_a_class():
+    # Test method object whose __self__ attribute is a class.
+
+    obj = C_.classmethod_
+
+    # Object is an 'instance method'
+    assert inspect.ismethod(obj)
+
+    # Object is not an instance of 'classmethod'.
+    assert not isinstance(obj, classmethod)
+
+    # Type of object is 'instancemethod' in Python 2.
+    assert type(obj).__name__ == 'instancemethod' or sys.version_info[0] != 2
+
+    # Type of object is 'method' in Python 3+.
+    assert type(obj).__name__ == 'method' or sys.version_info[0] == 2
+
+    # The '__self__' attribute is a class.
+    assert inspect.isclass(obj.__self__)
+
+    expected = __name__ + '.C_.classmethod_'
 
     nose.tools.assert_equals(fullqualname(obj), expected)

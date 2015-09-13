@@ -1,5 +1,6 @@
 """Tests for fullqualname."""
 
+import datetime
 import decorator
 import inspect
 import nose
@@ -113,5 +114,17 @@ def test_function_wrapped_attribute():
     assert type(obj).__name__ == 'instancemethod' or sys.version_info[0] == 3
 
     expected = __name__ + '.C_.decorated_method_'
+
+    nose.tools.assert_equals(fullqualname(obj), expected)
+
+
+def test_member_descriptor():
+    # Test member descriptor object.
+
+    obj = datetime.timedelta.days
+
+    assert type(obj).__name__ == 'member_descriptor'
+
+    expected = 'datetime.timedelta.days'
 
     nose.tools.assert_equals(fullqualname(obj), expected)

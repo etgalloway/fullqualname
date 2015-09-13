@@ -20,6 +20,9 @@ class C_(object):
     def decorated_method_(self):
         """decorated method"""
 
+    def method_(self):
+        """method"""
+
     @property
     def property_(self):
         """property"""
@@ -205,5 +208,27 @@ def test_property():
         expected = __name__ + '.C_.property_'
     else:
         expected = '__builtin__.property'
+
+    nose.tools.assert_equals(fullqualname(obj), expected)
+
+
+def test_method_self_is_not_a_class():
+    # Test method object whose __self__ attribute is not a class.
+
+    obj = C_().method_
+
+    # Object is an 'instance method'.
+    assert inspect.ismethod(obj)
+
+    # Object is an 'instance method' in Python 2.
+    assert type(obj).__name__ == 'instancemethod' or sys.version_info[0] != 2
+
+    # Object is a 'method' in Python 3.
+    assert type(obj).__name__ == 'method' or sys.version_info[0] < 3
+
+    # '__self__' attribute is not a class.
+    assert not inspect.isclass(obj.__self__)
+
+    expected = __name__ + '.C_.method_'
 
     nose.tools.assert_equals(fullqualname(obj), expected)

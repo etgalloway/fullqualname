@@ -292,3 +292,13 @@ def test_class():
     expected = __name__ + '.C_'
 
     nose.tools.assert_equals(fullqualname(obj), expected)
+
+
+def test_class_instance():
+    # Test class instance object.
+
+    obj = C_()
+
+    expected = __name__ + '.C_'
+
+    nose.tools.assert_equals(fullqualname(obj), expected)

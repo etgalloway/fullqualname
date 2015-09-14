@@ -261,3 +261,22 @@ def test_method_self_is_a_class():
     expected = __name__ + '.C_.classmethod_'
 
     nose.tools.assert_equals(fullqualname(obj), expected)
+
+
+def test_unbound_method_py2():
+    # Test unbound method object (Python 2).
+
+    obj = C_.method_
+
+    # In Python 2, the object is an unbound method.
+    # Its '__self__' attribute is None.
+    # (https://docs.python.org/2/reference/datamodel.html).
+    assert type(obj).__name__ == 'instancemethod' and \
+        obj.__self__ is None or sys.version_info[0] > 2
+
+    # In Python 3, object is a function.
+    assert type(obj).__name__ == 'function' or sys.version_info[0] == 2
+
+    expected = __name__ + '.C_.method_'
+
+    nose.tools.assert_equals(fullqualname(obj), expected)

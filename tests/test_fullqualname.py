@@ -280,3 +280,15 @@ def test_unbound_method_py2():
     expected = __name__ + '.C_.method_'
 
     nose.tools.assert_equals(fullqualname(obj), expected)
+
+
+def test_class():
+    # Test class object.
+
+    obj = C_
+
+    assert inspect.isclass(obj)
+
+    expected = __name__ + '.C_'
+
+    nose.tools.assert_equals(fullqualname(obj), expected)

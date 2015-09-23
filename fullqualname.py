@@ -68,6 +68,7 @@ def _fullqualname_function_py3(obj):
     """
 
     if hasattr(obj, "__wrapped__"):
+        # Required for decorator.__version__ <= 4.0.0.
         qualname = obj.__wrapped__.__qualname__
     else:
         qualname = obj.__qualname__

@@ -2,7 +2,11 @@
 fullqualname
 ============
 
-Fully qualified names for Python objects.
+In Python, the `fully qualified name` of an object is the full dotted "path"
+to its definition.
+
+`fullqualname` provides fully qualified names for a variety of types in Python
+2 and 3.
 
 Install
 =======

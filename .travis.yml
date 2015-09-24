@@ -5,4 +5,5 @@ python:
   - "3.4"
   - "3.5"
 install:
+  - pip install decorator==4.0.0
 script: nosetests

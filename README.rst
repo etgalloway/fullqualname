@@ -2,7 +2,7 @@
 fullqualname
 ============
 
-In Python, the `fully qualified name` of an object is the full dotted "path"
+The `fully qualified name` of an object in Python is the full dotted "path"
 to its definition.
 
 `fullqualname` provides fully qualified names for a variety of types in Python

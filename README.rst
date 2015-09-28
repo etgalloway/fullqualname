@@ -11,9 +11,9 @@ to its definition.
 Install
 =======
 
-.. code::
+::
 
-    $ pip install git+git://github.com/etgalloway/fullqualname#egg=fullqualname
+    $ pip install fullqualname
 
 Use
 ===

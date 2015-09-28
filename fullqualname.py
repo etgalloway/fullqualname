@@ -3,7 +3,7 @@
 import inspect
 import sys
 
-__version__ = '0.1.0.dev'
+__version__ = '0.1.0'
 
 
 def fullqualname_py3(obj):

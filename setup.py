@@ -1,7 +1,6 @@
 """Setup file for fullqualname."""
 
 from setuptools import setup
-from fullqualname import __version__
 
 description = 'Fully qualified names for Python objects'
 
@@ -23,7 +22,7 @@ keywords = 'introspection'
 
 setup(
     name='fullqualname',
-    version=__version__,
+    version='0.1.0',
     py_modules=['fullqualname'],
     author='Eric Galloway',
     author_email='ericgalloway@gmail.com',
